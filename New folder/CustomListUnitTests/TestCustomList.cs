@@ -71,7 +71,7 @@ namespace CustomListUnitTests
             //act
 
             test.Add(5);
-            actual = test.Count;
+            actual = test.count;
 
             //assert
 
@@ -125,7 +125,7 @@ namespace CustomListUnitTests
             //act
 
             test.Add(5);
-            actual = test.Count;
+            actual = test.count;
 
             //assert
 
@@ -133,12 +133,37 @@ namespace CustomListUnitTests
 
         }
 
+        //
+
         [TestMethod]
-        public void Add_AddItemToListWithFullArray_ItemIsAddedToList()
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void Reduce_EmptyList_ThrowException()
         {
             //test condition
+            //reduce empty list throw exception
 
-            /*When something is added to a list whose inner array is full, it should still add the item*/
+            //arrange
+
+            MyList<int> test = new MyList<int>();
+            int expected;
+
+            //act
+
+            test.ReduceAt(0);
+
+            //assert
+
+
+
+        }
+
+
+        [TestMethod]
+        public void Reduce_PopulatedList_ItemIsRemovedFromList()
+        {
+            //test condition
+            //reduce populated list by one item
+
 
             //arrange
 
@@ -146,20 +171,79 @@ namespace CustomListUnitTests
             test.Add(2);
             test.Add(3);
             test.Add(4);
-            int expected = 5;
+            int expected;
             int actual;
-
 
             //act
 
-            test.Add(5);
-            actual = test[3];
+            test.ReduceAt(1);
+            expected = 4;
+            actual = test[1];
 
             //assert
 
             Assert.AreEqual(expected, actual);
 
         }
+
+
+        [TestMethod]
+        public void Reduce_PopulatedList_CountDecreasesByOne()
+        {
+            //test condition
+            //reduce populated list count decrease by one
+
+
+            //arrange
+
+            MyList<int> test = new MyList<int>();
+            test.Add(2);
+            test.Add(3);
+            test.Add(4);
+            int expected;
+            int actual;
+
+            //act
+
+            test.ReduceAt(1);
+            expected = 2;
+            actual = test.count;
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+
+        [TestMethod]
+        public void Reduce_PopulatedList_CapacityDecreases()
+        {
+            //test condition
+            //reduce populated list capacity decrease
+
+
+            //arrange
+
+            MyList<int> test = new MyList<int>();
+            test.Add(2);
+            test.Add(3);
+            test.Add(4);
+            int expected;
+            int actual;
+
+            //act
+
+            test.ReduceAt(1);
+            expected = 4;
+            actual = test.Capacity;
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
 
         //last line of main block
     }
