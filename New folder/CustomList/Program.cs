@@ -23,10 +23,14 @@ namespace CustomList
             myList.Add(9);
             myList.Add(10);
 
+            myList.Remove(8);
+
             for (int i = 0; i < 9; i++)
             {
                 Console.WriteLine(myList[i]);
             }
+
+            Console.ReadLine();
 
             //last line of main block
         }

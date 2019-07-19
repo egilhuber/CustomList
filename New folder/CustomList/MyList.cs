@@ -22,7 +22,15 @@ namespace CustomList
                 capacity = value;
             }
         }
+
         T[] items;
+        public bool isRemoved;
+        public bool inArray;
+        public int whichIndex;
+        public bool place = true;
+        public int x = 1;
+
+
 
         //ctor
         public MyList()
@@ -119,7 +127,129 @@ namespace CustomList
             }
         }
 
+        public bool InArray(T value)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (items[i].Equals(value))
+                {
+                    inArray = true;
+                    return inArray;
+                }
+                
+            }
+            return place; 
+        }
 
+
+        public int Where(T value)
+        {
+            for (int j = 0; j < count; j++)
+            {
+                if (items[j].Equals(value))
+                {
+                    whichIndex = j;
+                    return whichIndex;
+                }
+            }
+            return x;
+        }
+
+        public bool Remove(T value)
+        {
+
+            InArray(value);
+
+            Where(value);
+
+            if (inArray == true)
+            {
+                if (count == 1)
+                {
+                    Capacity = 0; 
+                    T[] tempItems = new T[Capacity]; 
+                    items = tempItems;
+                    isRemoved = true;
+                    return isRemoved;
+                }
+
+                else if (count > 1 && count < 4 && count % 4 != 0)
+                {
+                    Capacity = 4;
+                    T[] tempItems = new T[Capacity];
+
+                    for (int i = 0; i < whichIndex; i++) //copies data from old array to new array up to removed value
+                    {
+                        tempItems[i] = items[i];
+                    }
+
+                    for (int i = whichIndex; i > whichIndex; i++) //copies data from old array to new array after removed value
+                    {
+                        tempItems[i] = items[i];
+                    }
+
+                    items = tempItems; //pushes data from temporary array to og array
+                    count--;
+                    isRemoved = true;
+                    return isRemoved;
+
+                }
+                else if (count > 4 && count % 4 != 0)
+                {
+                    T[] tempItems = new T[Capacity];
+
+                    for (int i = 0; i < whichIndex; i++) //copies data from old array to new array up to removed value
+                    {
+                        tempItems[i] = items[i];
+                    }
+
+                    for (int i = whichIndex; i > whichIndex; i++) //copies data from old array to new array after removed value
+                    {
+                        tempItems[i] = items[i];
+                    }
+
+
+                    items = tempItems; //pushes data from temporary array to og array
+                    count--;
+                    isRemoved = true;
+                    return isRemoved;
+
+                }
+                else if (count % 4 == 0 && count == (0.5 * Capacity))
+                {
+                    Capacity = count / 2;
+                    T[] tempItems = new T[Capacity];
+
+                    for (int i = 0; i < whichIndex; i++) //copies data from old array to new array up to removed value
+                    {
+                        tempItems[i] = items[i];
+                    }
+
+                    for (int i = whichIndex; i > whichIndex; i++) //copies data from old array to new array after removed value
+                    {
+                        tempItems[i] = items[i];
+                    }
+
+
+                    items = tempItems; //pushes data from temporary array to og array
+                    count--;
+                    isRemoved = true;
+                    return isRemoved;
+
+                }
+                else
+                {
+                    return place;
+                }
+               
+            }
+            else
+            {
+                return place;
+            }
+            
+
+        }
 
         //last line of main block
     }
