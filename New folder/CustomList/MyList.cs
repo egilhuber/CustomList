@@ -24,7 +24,7 @@ namespace CustomList
         }
 
         T[] items;
-        public bool isRemoved;
+        // public bool isRemoved;
         public bool inArray;
         public int whichIndex;
         public bool place = true;
@@ -157,7 +157,7 @@ namespace CustomList
 
         public bool Remove(T value)
         {
-
+            bool isRemoved = false;
             InArray(value);
 
             Where(value);
@@ -177,15 +177,14 @@ namespace CustomList
                 {
                     Capacity = 4;
                     T[] tempItems = new T[Capacity];
-
                     for (int i = 0; i < whichIndex; i++) //copies data from old array to new array up to removed value
                     {
                         tempItems[i] = items[i];
                     }
 
-                    for (int i = whichIndex; i > whichIndex; i++) //copies data from old array to new array after removed value
+                    for (int i = whichIndex + 1; i < count; i++) //copies data from old array to new array after removed value
                     {
-                        tempItems[i] = items[i];
+                        tempItems[i - 1] = items[i];
                     }
 
                     items = tempItems; //pushes data from temporary array to og array
@@ -203,9 +202,9 @@ namespace CustomList
                         tempItems[i] = items[i];
                     }
 
-                    for (int i = whichIndex; i > whichIndex; i++) //copies data from old array to new array after removed value
+                    for (int i = whichIndex + 1; i < count; i++) //copies data from old array to new array after removed value
                     {
-                        tempItems[i] = items[i];
+                        tempItems[i - 1] = items[i];
                     }
 
 
@@ -225,9 +224,9 @@ namespace CustomList
                         tempItems[i] = items[i];
                     }
 
-                    for (int i = whichIndex; i > whichIndex; i++) //copies data from old array to new array after removed value
+                    for (int i = whichIndex + 1; i < count; i++) //copies data from old array to new array after removed value
                     {
-                        tempItems[i] = items[i];
+                        tempItems[i - 1] = items[i];
                     }
 
 

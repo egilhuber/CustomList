@@ -185,7 +185,6 @@ namespace CustomListUnitTests
 
         }
 
-
         [TestMethod]
         public void Remove_PopulatedList_CapacityDecreases()
         {
@@ -214,8 +213,6 @@ namespace CustomListUnitTests
 
         }
 
-
-
         [TestMethod]
         public void Remove_PopulatedListNonExistingItemNotRemoved_FalseBool()
         {
@@ -230,11 +227,11 @@ namespace CustomListUnitTests
             test.Add(3);
             test.Add(4);
             bool expected = false;
-            bool actual = test.isRemoved;
+            bool actual;
 
             //act
 
-            test.Remove(6);
+            actual = test.Remove(6);
 
             //assert
 
@@ -272,7 +269,7 @@ namespace CustomListUnitTests
         public void Remove_PopulatedListItemRemoved_CountDoesChange()
         {
             //test condition
-            //try to remove a thing that's not in the list
+            //try to remove a thing in the list
 
 
             //arrange
@@ -281,13 +278,13 @@ namespace CustomListUnitTests
             test.Add(2);
             test.Add(3);
             test.Add(4);
-            int expected = 2;
-            int actual = test.count;
+ 
 
             //act
 
             test.Remove(2);
-
+            int expected = 2;
+            int actual = test.count;
             //assert
 
             Assert.AreEqual(expected, actual);
@@ -310,13 +307,13 @@ namespace CustomListUnitTests
             test.Add(3);
             test.Add(5);
 
-            int expected = 4;
-            int actual = test[1];
+
 
             //act
 
             test.Remove(3);
-
+            int expected = 4;
+            int actual = test[1];
             //assert
 
             Assert.AreEqual(expected, actual);
@@ -336,14 +333,13 @@ namespace CustomListUnitTests
             test.Add(2);
             test.Add(3);
             test.Add(4);
-            int expected;
-            int actual;
+
 
             //act
 
-            test.Remove(3);
-            expected = 4;
-            actual = test[1];
+            test.Remove(2);
+            int expected = 4;
+            int actual = test[1];
 
             //assert
 
@@ -365,11 +361,11 @@ namespace CustomListUnitTests
             test.Add(3);
             test.Add(4);
             bool expected = true;
-            bool actual = test.isRemoved;
+            bool actual;
 
             //act
 
-            test.Remove(2);
+            actual = test.Remove(2);
 
             //assert
 
