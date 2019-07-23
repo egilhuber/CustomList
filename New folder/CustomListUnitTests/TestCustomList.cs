@@ -71,7 +71,7 @@ namespace CustomListUnitTests
             //act
 
             test.Add(5);
-            actual = test.count;
+            actual = test.Count;
 
             //assert
 
@@ -125,7 +125,7 @@ namespace CustomListUnitTests
             //act
 
             test.Add(5);
-            actual = test.count;
+            actual = test.Count;
 
             //assert
 
@@ -145,7 +145,7 @@ namespace CustomListUnitTests
 
             MyList<int> test = new MyList<int>();
             int expected = 0;
-            int actual = test.count;
+            int actual = test.Count;
 
             //act
 
@@ -177,7 +177,7 @@ namespace CustomListUnitTests
 
             test.Remove(3);
             expected = 2;
-            actual = test.count;
+            actual = test.Count;
 
             //assert
 
@@ -253,7 +253,7 @@ namespace CustomListUnitTests
             test.Add(3);
             test.Add(4);
             int expected = 3;
-            int actual = test.count;
+            int actual = test.Count;
 
             //act
 
@@ -284,7 +284,7 @@ namespace CustomListUnitTests
 
             test.Remove(2);
             int expected = 2;
-            int actual = test.count;
+            int actual = test.Count;
             //assert
 
             Assert.AreEqual(expected, actual);
@@ -374,7 +374,241 @@ namespace CustomListUnitTests
         }
 
 
+        //
 
+        [TestMethod]
+        public void OverrideAdd_BothPopulatedSameLength_ListsAreCombined()
+        {
+            //test condition
+
+            //Add two populated lists of same length together
+
+            //arrange
+
+            MyList<int> myList = new MyList<int>();
+
+            MyList<int> newList = new MyList<int>();
+
+            MyList<int> storeList = new MyList<int>();
+
+            int expected = 6;
+            int actual;
+
+            //act
+
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            newList.Add(5);
+            newList.Add(6);
+            newList.Add(7);
+            newList.Add(8);
+
+            storeList = myList + newList;
+
+            actual = storeList[5];
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void OverrideAdd_BothPopulatedDifferentLength_ListsAreCombined()
+        {
+            //test condition
+
+            //Add two populated lists of different length together
+
+            //arrange
+
+            MyList<int> myList = new MyList<int>();
+
+            MyList<int> newList = new MyList<int>();
+
+            MyList<int> storeList = new MyList<int>();
+
+            int expected = 7;
+            int actual;
+
+            //act
+
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            //use tostring
+
+            newList.Add(5);
+            newList.Add(6);
+            newList.Add(7);
+            newList.Add(8);
+
+            storeList = myList + newList;
+
+            actual = storeList[5];
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void OverrideAdd_OnlyOnePopulatedList_ListsAreCombined()
+        {
+            //test condition
+
+            //Add a populated list to an empty list
+
+            //arrange
+
+            MyList<int> myList = new MyList<int>();
+
+            MyList<int> newList = new MyList<int>();
+
+            MyList<int> storeList = new MyList<int>();
+
+            int expected = 7;
+            int actual;
+
+            //act
+
+            newList.Add(5);
+            newList.Add(6);
+            newList.Add(7);
+            newList.Add(8);
+
+            storeList = myList + newList;
+
+            actual = storeList[2];
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        //
+
+        [TestMethod]
+        public void OverrideSubtract_BothPopulatedSameLengthOneDuplicate_OneItemRemoved()
+        {
+            //test condition
+
+            //Both populated same length one duplicate
+
+            //arrange
+
+            MyList<int> myList = new MyList<int>();
+
+            MyList<int> newList = new MyList<int>();
+
+            MyList<int> storeList = new MyList<int>();
+
+            int expected = "1,2,4";
+            int actual;
+
+            //act
+
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            newList.Add(5);
+            newList.Add(3);
+            newList.Add(7);
+            newList.Add(8);
+
+            storeList = myList - newList;
+
+            actual = storeList.ToString();
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        public void OverrideSubtract_BothPopulatedDifferentLengthOneDuplicate_OneItemRemoved()
+        {
+            //test condition
+
+            //Both populated different length one duplicate
+
+            //arrange
+
+            MyList<int> myList = new MyList<int>();
+
+            MyList<int> newList = new MyList<int>();
+
+            MyList<int> storeList = new MyList<int>();
+
+            int expected = "1,2";
+            int actual;
+
+            //act
+
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+
+            newList.Add(5);
+            newList.Add(6);
+            newList.Add(7);
+            newList.Add(3);
+
+            storeList = myList - newList;
+
+            actual = storeList.ToString();
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        public void OverrideSubtract_BothPopulatedSameLengthMultipleDuplicates_OneItemRemoved()
+        {
+            //test condition
+
+            //Both populated, same length, multiple duplicates
+
+            //arrange
+
+            MyList<int> myList = new MyList<int>();
+
+            MyList<int> newList = new MyList<int>();
+
+            MyList<int> storeList = new MyList<int>();
+
+            int expected = "2,4";
+            int actual;
+
+            //act
+
+            myList.Add(3);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            newList.Add(5);
+            newList.Add(6);
+            newList.Add(3);
+            newList.Add(8);
+
+            storeList = myList - newList;
+
+            actual = storeList.ToString();
+
+            //assert
+
+            Assert.AreEqual(expected, actual);
+
+        }
 
         //last line of main block
     }
